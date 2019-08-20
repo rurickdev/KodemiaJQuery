@@ -1,0 +1,19 @@
+body {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.square {
+  width: 200px;
+  height: 200px;
+  box-shadow: 5px 5px 5px #333;
+  border-radius: 5px;
+}
+.square.green {
+  background: green;
+}
+.square.red {
+  background: red;
+}
+
+/*# sourceMappingURL=main.css.map */
