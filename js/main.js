@@ -1,42 +1,17 @@
 // * ------ Exercise 1 ------ * //
 
-// const buttonText = 'Click Me!'
-// const redSquare = '<div class="square red"></div>'
-// const greenSquare = '<div class="square green"></div>'
-// const button = `<button>${buttonText}</button>`
+const urlBase = 'https://jquerycrud-ed8dc.firebaseio.com/songsList/.json'
 
-// $('body').append(greenSquare)
-// $('body').append(redSquare)
+let songsNames = {}
 
-// $('.square').append(button)
-
-// let squares = document.getElementsByClassName('square')
-
-// $('button').click(({ target }) => {
-//   $(target).parent().slideUp()
-// })
-
-// * ------ Exercise 1 ------ * //
-
-const songsNames = [
-  'Los chicos no lloran',
-  'Bambu',
-  'Morena mía',
-  'Manos vacías',
-  'Aire soy',
-  'Te amaré',
-  'Y como un lobo',
-  'Tu Salvación'
-]
-
-const favorites = []
-
-const buildSongsList = (songList) => {
-
-  songList.forEach(name => {
+const buildSongsList = (songs) => {
+  $.each(songs, (key, value) => {
     $('.songs-list').append(`
-      <div class="song-card" data-song-name="${name}">
-        <p class="song-name">${name}</p>
+      <div class="song-card" data-song-name="${value.name}">
+        <p class="song-name">${value.name}</p>
+        <p><b>${value.author}</b></p>
+        <p><b>${value.gender}</b></p>
+        <p><b>${value.country}</b></p>
         <div class="button-wrapper">
           <button class="btn-danger">Delete</button>
           <button class="btn-success">Favourite</button>
@@ -54,8 +29,49 @@ const deleteSong = (event) => {
 }
 
 const favouriteSong = (event) => {
-  $(event.target).closest('.song-card').appendTo('.favourites-songs')
+  $(event.target).closest('.song-card').appendTo('.favourite-songs')
   $(event.target).remove()
 }
 
-buildSongsList(songsNames)
+const pushNewSong = () => {
+  const name = $('#name').val()
+  const author = $('#author').val()
+  const gender = $('#gender').val()
+  const country = $('#country').val()
+
+  const song = {
+    name,
+    author,
+    gender,
+    country
+  }
+
+  postSongs(song)
+
+  $('.songs-list').empty()
+  getSongs()
+}
+
+const getSongs = () => {
+  $.ajax({
+    method: "GET",
+    url: urlBase,
+    success: (response) => {
+      buildSongsList(response)
+    }
+  })
+
+}
+
+const postSongs = (song) => {
+  $.ajax({
+    method: "POST",
+    url: urlBase,
+    data: JSON.stringify(song),
+    success: (response) => {
+    }
+  })
+}
+
+getSongs()
+$('#submit-data').click(pushNewSong)

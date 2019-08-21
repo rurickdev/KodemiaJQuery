@@ -1,30 +1,96 @@
-body {
+* {
+  padding: 0;
+  margin: 0;
+  font-family: arial;
+  box-sizing: border-box;
+}
+
+.songs-list, .favourite-songs {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid peru;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #ccc;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.songs-list h1, .favourite-songs h1 {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.songs-list .song-card, .favourite-songs .song-card {
+  width: 30%;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  margin-bottom: 20px;
+}
+.songs-list .song-card .song-name, .favourite-songs .song-card .song-name {
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.songs-list .song-card p, .favourite-songs .song-card p {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.songs-list .song-card .button-wrapper, .favourite-songs .song-card .button-wrapper {
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
 }
-
-.square {
-  width: 200px;
-  height: 200px;
-  box-shadow: 5px 5px 5px #333;
+.songs-list .song-card .button-wrapper button, .favourite-songs .song-card .button-wrapper button {
+  height: 30px;
+  padding: 7px 15px;
+  border: none;
   border-radius: 5px;
 }
-.square.green {
+.songs-list .song-card .button-wrapper button.btn-success, .favourite-songs .song-card .button-wrapper button.btn-success {
+  background: none;
+  border: 2px solid green;
+}
+.songs-list .song-card .button-wrapper button.btn-success:hover, .favourite-songs .song-card .button-wrapper button.btn-success:hover {
   background: green;
 }
-.square.red {
+.songs-list .song-card .button-wrapper button.btn-danger, .favourite-songs .song-card .button-wrapper button.btn-danger {
+  background: none;
+  border: 2px solid red;
+}
+.songs-list .song-card .button-wrapper button.btn-danger:hover, .favourite-songs .song-card .button-wrapper button.btn-danger:hover {
   background: red;
 }
 
-.song {
-  width: 200px;
-  height: 200px;
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQynFMvMHVSk-vBpJOerZE9nyOEJitSWhDkc8wp202oMmEb1ptV);
-  background-size: 200px 200px;
+.form-wrapper {
+  display: flex;
+  justify-content: center;
 }
-
-.title {
-  background-color: #dddddd;
+.form-wrapper form {
+  width: 50%;
+  padding: 15px;
+  margin: 20px 0;
+  border: 1px solid #333;
+  border-radius: 5px;
+  box-shadow: #333;
+}
+.form-wrapper form .form-group {
+  margin-bottom: 15px;
+}
+.form-wrapper form .form-group input {
+  height: 30px;
+  background: white;
+  border: 1px solid #acacac;
+  border-radius: 5px;
+  padding-left: 10px;
+  width: 100%;
+}
+.form-wrapper form button {
+  height: 30px;
+  padding: 7px 15px;
 }
 
 /*# sourceMappingURL=main.css.map */
