@@ -17,8 +17,6 @@
 // })
 
 // * ------ Exercise 1 ------ * //
-const btnDel = '<button class="btn-delete">Delete</button>'
-const btnFav = '<button class="btn-favorite">Favorite</button>'
 
 const songsNames = [
   'Los chicos no lloran',
@@ -34,51 +32,30 @@ const songsNames = [
 const favorites = []
 
 const buildSongsList = (songList) => {
-  const disk = `<div class="song"></div>`
-  for (let index = 0; index < songList.length; index++) {
-    $(`.songs`).append(disk)
-    let song = $($('.song')[index])
-    song.append(`<div class="title"><h2>${songList[index]}</h2></div>`)
-    song.append(btnDel)
-    song.append(btnFav)
 
-    let buttonDelte = $($('.btn-delete')[index])
-    buttonDelte.click(deleteSong)
+  songList.forEach(name => {
+    $('.songs-list').append(`
+      <div class="song-card" data-song-name="${name}">
+        <p class="song-name">${name}</p>
+        <div class="button-wrapper">
+          <button class="btn-danger">Delete</button>
+          <button class="btn-success">Favourite</button>
+        </div>
+      </div>
+    `)
 
-    let buttonFavorite = $($('.btn-favorite')[index])
-    buttonFavorite.click(favoriteSong)
-  }
+    $('.btn-danger').on('click', deleteSong)
+    $('.btn-success').on('click', favouriteSong)
+  })
 }
 
-const buildFavoritesSongsList = (favList) => {
-  const disk = `<div class="song favorite-song"></div>`
-  for (let index = 0; index < favList.length; index++) {
-    $('.favorites').append(disk)
-    let song = $($('.favorite-song')[index])
-    song.append(`<div class="title"><h2>${favList[index]}</h2></div>`)
-    // song.append(btnDel)
-
-    // let buttonDelte = $($('.btn-delete')[index])
-    // buttonDelte.click(deleteSong)
-  }
+const deleteSong = (event) => {
+  $(event.target).closest('.song-card').remove()
 }
 
-const deleteSong = ({ target }) => {
-  let song = $($(target).parent())
-  song.remove()
-}
-
-const favoriteSong = ({ target }) => {
-  $('.favorites').empty()
-  $('.favorites').text('Favorites')
-
-  let title = $($($(target).siblings('.title')).children('h2')).text()
-  favorites.push(title)
-
-  let song = $($(target).parent())
-  song.remove()
-
-  buildFavoritesSongsList(favorites)
+const favouriteSong = (event) => {
+  $(event.target).closest('.song-card').appendTo('.favourites-songs')
+  $(event.target).remove()
 }
 
 buildSongsList(songsNames)
