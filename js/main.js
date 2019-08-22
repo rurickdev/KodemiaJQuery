@@ -52,6 +52,16 @@ const pushNewSong = () => {
   getSongs()
 }
 
+const postSongs = (song) => {
+  $.ajax({
+    method: "POST",
+    url: urlBase,
+    data: JSON.stringify(song),
+    success: (response) => {
+    }
+  })
+}
+
 const getSongs = () => {
   $.ajax({
     method: "GET",
@@ -61,16 +71,6 @@ const getSongs = () => {
     }
   })
 
-}
-
-const postSongs = (song) => {
-  $.ajax({
-    method: "POST",
-    url: urlBase,
-    data: JSON.stringify(song),
-    success: (response) => {
-    }
-  })
 }
 
 getSongs()
